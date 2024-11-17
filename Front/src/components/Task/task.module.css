@@ -2,4 +2,11 @@
     display: flex;
     width: 90%;
     border-bottom: 1px solid red;
+    justify-content: space-around;
+    gap: 5em;
+}
+
+.task-container-buttons {
+    display: flex;
+    gap: 1em;
 }

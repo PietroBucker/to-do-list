@@ -1,0 +1,23 @@
+.styled-button {
+    display: flex;
+    background: none;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    position: relative;
+}
+
+.styled-button:focus {
+    outline: none;
+    
+}
+
+
+
+.styled-button:hover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, var(--color-on-hover) 0%, transparent 60%);
+    mix-blend-mode: normal;
+  }
