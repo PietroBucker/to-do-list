@@ -1,0 +1,11 @@
+.theme-button {
+    background-color: var(--color-primary);
+}
+
+.theme-button:hover {
+    background-color: var(--color-on-hover);
+}
+
+.theme-button:focus {
+    outline: none;
+}
