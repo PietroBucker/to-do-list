@@ -1,6 +1,6 @@
 import StyledButton from '../StyledButton';
 import styles from './task.module.css';
-import pencil from '../../assets/Vector.svg';
+import pencil from '../../assets/pencil.svg';
 import trash from '../../assets/trash-svgrepo-com 1.svg';
 export default function Tasks() {
   return (

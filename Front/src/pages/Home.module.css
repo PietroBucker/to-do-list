@@ -3,10 +3,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: top;
-    height: 100vh;
+    height: 90vh;
     width: 60vw;
     gap: 2em;
-    border: 2px solid red;
 }
 
 .home-container-search {
@@ -15,3 +14,30 @@
     justify-content: space-between;
     width: 90%;
 }
+
+.home-container-tasks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: top;
+    gap: 1em;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.home-container-tasks::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.fixed-button {
+    position: fixed;
+    bottom: 1em;
+    right: center;
+    background-color: var(--color-primary);
+}
+.fixed-button:hover {
+    content: '';
+    background-color: var(--color-on-hover);
+}
+

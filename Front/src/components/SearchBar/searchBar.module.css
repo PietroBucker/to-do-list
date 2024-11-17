@@ -18,7 +18,7 @@
 }
 
 .search-bar-container input:hover {
-    background-color: var(--color-on-hover);
+    background-color: var(--color-on-hover); 
 }
 
 .search-bar-container::after {
