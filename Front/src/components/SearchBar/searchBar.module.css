@@ -17,6 +17,10 @@
     border-color: var(--color-on-hover);
 }
 
+.search-bar-container input:hover {
+    background-color: var(--color-on-hover);
+}
+
 .search-bar-container::after {
     content: '\1F50D';
     position: absolute;
