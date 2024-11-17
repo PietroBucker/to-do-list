@@ -22,10 +22,20 @@
 }
 
 [data-theme="light"]  {
-  color: red;
+  color: black;
+  background-color: white;
+  input{
+    background-color: #f9f9f9;
+    color: black;
+  }
 }
 [data-theme="dark"]  {
-  color: blue;
+  color: white;
+  background-color: black;
+  input{
+    background-color: #242424;
+    color: white;
+  }
 }
 a {
   font-weight: 500;
