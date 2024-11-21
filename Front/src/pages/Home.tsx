@@ -34,17 +34,17 @@ export default function Home() {
             <div className={styles['home-container-tasks']}>
 
                 {!data ? '' : data.map((item) => (
-                    <Tasks key={item.id} >
-                        <div>{item.task_name}</div>
-                        <div>{item.limit_date}</div>
-                        <div>{item.cost}</div>
+                    <Tasks key={item.id} desc={item.descsda} >
+                        <div className={styles.task_item}>{item.task_name}</div>
+                        <div className={styles.task_item}>{item.limit_date}</div>
+                        <div className={styles.task_item}>{item.cost}</div>
                     </ Tasks>))}
                 <StyledButton 
                     onClick={() => modalFormRef.current?.showModal()}
                     className={styles['fixed-button']}>
                     <img src={cross} alt="" />
                 </StyledButton>
-                <Form ref={modalFormRef} useRef={modalFormRef} />
+                <Form ref={modalFormRef} useRef={modalFormRef} action={'save'}/>
             </div>
 
         </div>
