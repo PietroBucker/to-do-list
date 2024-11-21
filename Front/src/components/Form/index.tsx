@@ -4,9 +4,10 @@ import styles from './Form.module.css'
 import { TasksResponse } from '../../../../Back/src/interface';
 interface FormProps {
     useRef: React.RefObject<HTMLDialogElement>
+    action: string
 }
 
-const Form = React.forwardRef<HTMLDialogElement, FormProps>(({ useRef }, ref) => {
+const Form = React.forwardRef<HTMLDialogElement, FormProps>(({ useRef, action }, ref) => {
     const [data, setData] = useState<TasksResponse>({ task_name: '', limit_date: '', descsda: '' })
 
 
@@ -25,12 +26,25 @@ const Form = React.forwardRef<HTMLDialogElement, FormProps>(({ useRef }, ref) =>
         setData({ ...data, [target.name]: target.value })
     }
 
+    const handleSubmit = () => {
+        switch (action) {
+            case 'save':
+                console.log('save')
+                break;
+            case 'edit':
+                console.log('edit')
+                break;
+            default:
+                break;
+        }
+    }
+
     return (
 
-        <dialog ref={ref} onClick={handleOutsideClick} className={styles.dialogContent}>
-            <div>
+        <dialog ref={ref} onClick={handleOutsideClick} className={styles.dialog_container}>
+            <div className={styles.dialog_content}>
                 <form>
-                    <h2>NEW TASK</h2>
+                    <h2>{action === 'save' ? 'NEW TASK': 'EDIT TASK'}</h2>
                     <input
                         id='task_name'
                         name='task_name'
@@ -70,7 +84,7 @@ const Form = React.forwardRef<HTMLDialogElement, FormProps>(({ useRef }, ref) =>
 
                 </form>
 
-                <div>
+                <div className={styles.button_container}>
 
                     <StyledButton
                         onClick={() => {
@@ -80,6 +94,7 @@ const Form = React.forwardRef<HTMLDialogElement, FormProps>(({ useRef }, ref) =>
                         className={styles.buttons}
                     >CANCEL</StyledButton>
                     <StyledButton
+                        onClick={handleSubmit}
                         className={styles.buttons}
                     >APPLY</StyledButton>
                 </div>
