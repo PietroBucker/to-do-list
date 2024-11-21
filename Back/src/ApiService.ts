@@ -29,7 +29,7 @@ class ApiService implements IApiService {
                     //obs que em caso de sistemas grande isso nao seria uma boa pratica
 
                     const data = new Date('2024-12-12T03:00:00.000Z')
-                    const format = new Intl.DateTimeFormat('pt-BR').format(data)
+                    const format = new Intl.DateTimeFormat('pt-BR').format(data).toString()
                     return {...task, limit_date: format}
                 })
                 res.json(dataFormat)

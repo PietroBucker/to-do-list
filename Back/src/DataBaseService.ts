@@ -1,5 +1,5 @@
 import mysql, { Connection, ConnectionOptions, QueryResult } from 'mysql2';
-import { IDataBaseService } from './interface';
+import { IDataBaseService, TasksResponse } from './interface';
 import { rejects } from 'assert';
 
 export const dbConfig: ConnectionOptions = {
@@ -16,14 +16,14 @@ class DataBaseService implements IDataBaseService {
     constructor(private config: ConnectionOptions) {
         this.connection = mysql.createConnection(this.config);
     }
-    query(sql: string, values: []): Promise<QueryResult> {
+    query(sql: string, values: []): Promise<TasksResponse[]> {
         return new Promise((resolve, rejects) => {
             this.connection.query(sql, values, (err, results) => {
                 if (err) {
                     console.error('Erro ao executar a query:', err.message);
                     rejects(err);
                 } else {
-                    resolve(results);
+                    resolve(results as TasksResponse[]);
                 }
             });
         })
