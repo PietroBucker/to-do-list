@@ -21,9 +21,13 @@ export default function Home() {
 
     }, [])
     console.log(data)
-    const handleChange = (event: any) => {
-        setSearch(event.target.value)
-    }
+    
+    const filterData = data?.filter((item) => {
+        return item.task_name.includes(search)
+        || item.limit_date.includes(search)
+        || String(item.cost).includes(search)
+    })
+
     return (
         <div className={styles['home-container']}>
             <h1>TODO LIST</h1>
@@ -33,7 +37,7 @@ export default function Home() {
             </div>
             <div className={styles['home-container-tasks']}>
 
-                {!data ? '' : data.map((item) => (
+                {!filterData ? '' : filterData.map((item) => (
                     <Tasks key={item.id} desc={item.descsda} >
                         <div className={styles.task_item}>{item.task_name}</div>
                         <div className={styles.task_item}>{item.limit_date}</div>
