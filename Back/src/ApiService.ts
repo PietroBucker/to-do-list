@@ -30,7 +30,7 @@ class ApiService implements IApiService {
 
                     const data = new Date(task.limit_date)
                     const format = new Intl.DateTimeFormat('pt-BR').format(data).toString()
-                    return {...task, limit_date: format}
+                    return {...task, limit_date: format, cost: !task.cost? 0 : task.cost}
                 })
                 res.json(dataFormat)
             }
@@ -41,11 +41,11 @@ class ApiService implements IApiService {
         })
 
         this.app.post('/tasks', async (req, res) => {
-            const { task_name, cost, limit_date, descsda } = req.body as TasksResponse
-            const costVerify = !cost ? 0 : cost
+            const { task_name, cost, limit_date, description } = req.body as TasksResponse
+            const costVerify = !cost ? 0.00 : cost
             try {
-            const response = await this.db.query('INSERT INTO tasks (task_name, cost, limit_date, descsda) VALUES (?, ?, ?, ?)', [task_name, costVerify, limit_date, descsda])
-                res.json({id: response.insertId, task_name, cost: costVerify, limit_date, descsda})
+            const response = await this.db.query('INSERT INTO tasks (task_name, cost, limit_date, description) VALUES (?, ?, ?, ?)', [task_name, costVerify, limit_date, description])
+                res.json({id: response.insertId, task_name, cost: costVerify, limit_date, description})
             }
             catch (error) {
                 res.status(500).json({error: 'Erro ao criar a tarefa'})
@@ -53,12 +53,12 @@ class ApiService implements IApiService {
         })
 
         this.app.put('/tasks/:id', async (req, res) => {
-            const { task_name, cost, limit_date, descsda } = req.body as TasksResponse
+            const { task_name, cost, limit_date, description } = req.body as TasksResponse
             const { id } = req.params
-            const costVerify = !cost ? 0 : cost
+            const costVerify = !cost ? 0.00 : cost.toFixed(2)
             try {
-                const response = await this.db.query('UPDATE tasks SET task_name = ?, cost = ?, limit_date = ?, descsda = ? WHERE id = ?', [task_name, costVerify, limit_date, descsda, id])
-                res.json({id, task_name, cost: costVerify, limit_date, descsda})
+                const response = await this.db.query('UPDATE tasks SET task_name = ?, cost = ?, limit_date = ?, description = ? WHERE id = ?', [task_name, costVerify, limit_date, description, id])
+                res.json({id, task_name, cost: costVerify, limit_date, description})
             }
             catch (error) {
                 res.status(500).json({error: 'Erro ao atualizar a tarefa'})

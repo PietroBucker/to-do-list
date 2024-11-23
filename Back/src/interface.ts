@@ -19,5 +19,5 @@ export type TasksResponse = {
     task_name:string
     cost?:number
     limit_date:string
-    descsda:string //conferir o nome
+    description:string //conferir o nome
 }
