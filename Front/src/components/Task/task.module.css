@@ -38,3 +38,18 @@
     text-align: justify;
     max-width: 100%;
 }
+
+@media screen and (max-width: 425px) {
+    .task-container {
+        font-size: small;
+    }
+    
+    .task-container-buttons {
+        display: flex;
+        flex-direction: column;
+        img {
+            width: 25px;
+            height: 25px;
+        }
+    }
+}
