@@ -39,6 +39,10 @@
     max-width: 100%;
 }
 
+.task-over-1000 {
+    background-color: rgba(255, 255, 0, 0.521) !important;
+}
+
 @media screen and (max-width: 425px) {
     .task-container {
         font-size: small;

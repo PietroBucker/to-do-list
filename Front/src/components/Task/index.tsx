@@ -7,7 +7,7 @@ import Form from '../Form';
 import { deleteTask } from '../../helpers';
 
 
-export default function Tasks({ desc, children, loading, id }: any) {
+export default function Tasks({ desc, children, loading, id, over1000 }: any) {
   const editModalRef = React.useRef<HTMLDialogElement>(null)
   const [isOpen, setIsOpen] = React.useState(false)
 
@@ -15,7 +15,7 @@ export default function Tasks({ desc, children, loading, id }: any) {
 
   return (
     <div
-      className={styles['task-container']}
+      className={`${styles['task-container']} ${over1000 ? styles['task-over-1000'] : ''}`}
       onMouseOver={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
