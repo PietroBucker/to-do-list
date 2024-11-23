@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import StyledButton from '../StyledButton';
 import styles from './Form.module.css'
 import { TasksResponse } from '../../../../Back/src/interface';
 import PopUp from '../PopUp';
+import { editTask, saveTask } from '../../helpers';
 interface FormProps {
     useRef: React.RefObject<HTMLDialogElement>
     action: string
@@ -10,9 +11,10 @@ interface FormProps {
     id?: number
 }
 
-const Form = React.forwardRef<HTMLDialogElement, FormProps>(({ useRef, action, loading, id }, ref) => {
+const Form = React.forwardRef<HTMLDialogElement, FormProps>(({ useRef, action, loading, id=0 }, ref) => {
     const [data, setData] = useState<TasksResponse>({ task_name: '', limit_date: '', descsda: '' })
     const [message, setMessage] = useState<string>('')
+
     const handleOutsideClick = (e: React.MouseEvent<HTMLDialogElement>) => {
         if (e.target === useRef.current) {
             useRef.current?.close()
@@ -31,58 +33,23 @@ const Form = React.forwardRef<HTMLDialogElement, FormProps>(({ useRef, action, l
     const handleSubmit = () => {
         switch (action) {
             case 'save':
-                saveTask()
+                saveTask(data, setMessage)
                 loading(true)
                 useRef.current?.close()
+                cleanData()
                 break;
             case 'edit':
-                editTask()
+                editTask(data, id, setMessage)
                 loading(true)
                 useRef.current?.close()
-                               
+                cleanData()    
                 break;
                 default:
                     break;
                 }
             }
 
-    const saveTask = async () => {
-
-
-        const response = await fetch('http://localhost:5000/tasks/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        const json = await response.json()
-        if (json.error) {
-            setMessage(json.error)
-        }
-        else {
-            setMessage('Tarefa salva com sucesso')
-        }
-
-    }
-
-    const editTask = async () => {
-        const response = await fetch(`http://localhost:5000/tasks/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        const json = await response.json()
-        if (json.error) {
-            setMessage(json.error)
-        }
-        else {
-            setMessage('Tarefa atualizada com sucesso')
-        }
-
-    }
+    
 
     return (
         <>

@@ -4,22 +4,14 @@ import pencil from '../../assets/pencil.svg';
 import trash from '../../assets/trash-svgrepo-com 1.svg';
 import React from 'react';
 import Form from '../Form';
+import { deleteTask } from '../../helpers';
 
 
 export default function Tasks({ desc, children, loading, id }: any) {
   const editModalRef = React.useRef<HTMLDialogElement>(null)
   const [isOpen, setIsOpen] = React.useState(false)
 
-  const deleteTask = async () => {
-    const response = await fetch(`http://localhost:5000/tasks/${id}`, {
-      method: 'DELETE',
-    })
-    const json = await response.json()
-    if (json.error) {
-      console.log(json.error)
-    }
-    loading(true)
-  }
+  
 
   return (
     <div
@@ -35,7 +27,7 @@ export default function Tasks({ desc, children, loading, id }: any) {
           <img src={pencil} alt='pencil' />
         </StyledButton>
         <StyledButton
-        onClick={deleteTask}
+        onClick={() => deleteTask(id, loading)}
         >
           <img src={trash} alt="trash" />
         </StyledButton>
