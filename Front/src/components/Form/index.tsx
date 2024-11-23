@@ -12,7 +12,7 @@ interface FormProps {
 }
 
 const Form = React.forwardRef<HTMLDialogElement, FormProps>(({ useRef, action, loading, id=0 }, ref) => {
-    const [data, setData] = useState<TasksResponse>({ task_name: '', limit_date: '', descsda: '' })
+    const [data, setData] = useState<TasksResponse>({ task_name: '', limit_date: '', description: '' })
     const [message, setMessage] = useState<string>('')
 
     const handleOutsideClick = (e: React.MouseEvent<HTMLDialogElement>) => {
@@ -23,7 +23,7 @@ const Form = React.forwardRef<HTMLDialogElement, FormProps>(({ useRef, action, l
     };
 
     const cleanData = () => {
-        setData({ task_name: '', limit_date: '', descsda: '' })
+        setData({ task_name: '', limit_date: '', description: '' })
     }
 
     const handleChange = ({ target }: any) => {
@@ -74,7 +74,7 @@ const Form = React.forwardRef<HTMLDialogElement, FormProps>(({ useRef, action, l
                             name='limit_date'
                             value={data.limit_date}
                             onChange={handleChange}
-                            placeholder='Limit Date'
+                            placeholder='Limit Date: exp...2021-12-31'
                         />
 
 
@@ -90,7 +90,7 @@ const Form = React.forwardRef<HTMLDialogElement, FormProps>(({ useRef, action, l
                         <input
                             type="textarea"
                             name='descsda'
-                            value={data.descsda}
+                            value={data.description}
                             onChange={handleChange}
                             placeholder='Description'
                         />

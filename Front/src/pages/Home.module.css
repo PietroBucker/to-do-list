@@ -20,10 +20,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: top;
-    gap: 1em;
     width: 100%;
     height: 100%;
     overflow-y: auto;
+    
 }
 
 .home-container-tasks::-webkit-scrollbar {
@@ -53,6 +53,7 @@
     width: 100%;
     height: 100%;
 }
+
 
 @media screen and (max-width: 1440px) {
     .home-container {

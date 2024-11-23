@@ -31,7 +31,7 @@ export default function Home() {
             <div className={styles['home-container-tasks']}>
             {loading ? <h1>Carregando...</h1> : ''}
                 {!filtred ? '' : filtred.map((item) => (
-                    <Tasks key={item.id} desc={item.descsda} loading={setLoading} id={item.id}>
+                    <Tasks key={item.id} desc={item.description} loading={setLoading} id={item.id} over1000={item.cost as number >= 1000 ? true : false}>
                         <div className={styles.task_item}>{item.task_name}</div>
                         <div className={styles.task_item}>{item.limit_date}</div>
                         <div className={styles.task_item}>{item.cost}</div>
