@@ -52,8 +52,29 @@ class ApiService implements IApiService {
             }
         })
 
-       //post
-       //put
+        this.app.put('/tasks/:id', async (req, res) => {
+            const { task_name, cost, limit_date, descsda } = req.body as TasksResponse
+            const { id } = req.params
+            const costVerify = !cost ? 0 : cost
+            try {
+                const response = await this.db.query('UPDATE tasks SET task_name = ?, cost = ?, limit_date = ?, descsda = ? WHERE id = ?', [task_name, costVerify, limit_date, descsda, id])
+                res.json({id, task_name, cost: costVerify, limit_date, descsda})
+            }
+            catch (error) {
+                res.status(500).json({error: 'Erro ao atualizar a tarefa'})
+            }
+        })
+       
+        this.app.delete('/tasks/:id', async (req, res) => {
+            const { id } = req.params
+            try {
+                const response = await this.db.query('DELETE FROM tasks WHERE id = ?', [id])
+                res.json({id})
+            }
+            catch (error) {
+                res.status(500).json({error: 'Erro ao deletar a tarefa'})
+            }
+        })
        //delete 
     }
 
