@@ -3,7 +3,7 @@ import { Connection } from 'mysql2';
 export interface IDataBaseService {
     connection: Connection;
     connect(): void;
-    query(sql: string, values: []): any;
+    query(sql: string, values: any[]): any;
     disconnect(): void;
 }
 

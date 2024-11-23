@@ -37,6 +37,19 @@ class ApiService implements IApiService {
             catch (error) {
                 res.status(500).json({error: 'Erro ao buscar as tarefas'})
             }
+
+        })
+
+        this.app.post('/tasks', async (req, res) => {
+            const { task_name, cost, limit_date, descsda } = req.body as TasksResponse
+            const costVerify = !cost ? 0 : cost
+            try {
+            const response = await this.db.query('INSERT INTO tasks (task_name, cost, limit_date, descsda) VALUES (?, ?, ?, ?)', [task_name, costVerify, limit_date, descsda])
+                res.json({id: response.insertId, task_name, cost: costVerify, limit_date, descsda})
+            }
+            catch (error) {
+                res.status(500).json({error: 'Erro ao criar a tarefa'})
+            }
         })
 
        //post
