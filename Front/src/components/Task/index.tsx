@@ -6,26 +6,44 @@ import React from 'react';
 import Form from '../Form';
 
 
-export default function Tasks({desc ,children }: any) {
+export default function Tasks({ desc, children, loading, id }: any) {
   const editModalRef = React.useRef<HTMLDialogElement>(null)
   const [isOpen, setIsOpen] = React.useState(false)
+
+  const deleteTask = async () => {
+    const response = await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: 'DELETE',
+    })
+    const json = await response.json()
+    if (json.error) {
+      console.log(json.error)
+    }
+    loading(true)
+  }
+
   return (
     <div
       className={styles['task-container']}
       onMouseOver={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
-      >
+    >
       {children}
       <div className={styles['task-container-buttons']}>
         <StyledButton
-        onClick={() => editModalRef.current?.showModal()}
-        ><img src={pencil} alt='pencil' /></StyledButton>
-        <StyledButton><img src={trash} alt="trash" /></StyledButton>
+          onClick={() => editModalRef.current?.showModal()}
+        >
+          <img src={pencil} alt='pencil' />
+        </StyledButton>
+        <StyledButton
+        onClick={deleteTask}
+        >
+          <img src={trash} alt="trash" />
+        </StyledButton>
       </div>
       <dialog open={isOpen} className={styles.dialog_description}>
         <p className={styles.description}>{desc}</p>
       </dialog>
-      <Form ref={editModalRef} useRef={editModalRef} action={'edit'} />
+      <Form ref={editModalRef} useRef={editModalRef} action={'edit'} loading={loading} id={id} />
     </div>
   )
 }
