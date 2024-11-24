@@ -3,13 +3,13 @@
     "builds": [
       {
         "src": "./dist/ApiService.js",
-        "use": "@now/node"
+        "use": "@vercel/node"
       }
     ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "/dist/ApiService.js"
+        "dist": "./dist/ApiService.js"
       }
     ]
 }
