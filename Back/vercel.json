@@ -9,7 +9,7 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dist": "./dist/ApiService.js"
+        "dist": "/dist/ApiService.js"
       }
     ]
 }
