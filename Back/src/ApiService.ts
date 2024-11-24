@@ -126,14 +126,14 @@ class ApiService implements IApiService {
     }
 }
 
-// // Função serverless
-// export default async (req: VercelRequest, res: VercelResponse) => {
-//     const apiService = new ApiService(dbConfig); // Cria a instância da ApiService
+// Função serverless
+export default async (req: VercelRequest, res: VercelResponse) => {
+    const apiService = new ApiService(dbConfig); // Cria a instância da ApiService
     
-//     // Chama a função de handleRequest que cuida do roteamento e da lógica do Express
-//     apiService.startServer(3000);
-//     apiService.handleRequest(req, res);  
-// };
+    // Chama a função de handleRequest que cuida do roteamento e da lógica do Express
+    // apiService.startServer(5000);
+    apiService.handleRequest(req, res);  
+};
 
-const apiService = new ApiService(dbConfig)
-apiService.startServer(5000)
+// const apiService = new ApiService(dbConfig)
+// apiService.startServer(5000)
