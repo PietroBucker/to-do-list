@@ -1,0 +1,12 @@
+{
+    "builds": [
+      {
+        "src": "front/package.json",
+        "use": "@vercel/node"
+      }
+    ],
+    "ignore": [
+      "back"
+    ]
+  }
+  
