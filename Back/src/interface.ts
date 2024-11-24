@@ -15,7 +15,7 @@ export interface IApiService {
 }
 
 export type TasksResponse = {
-    id:number
+    id?:number
     task_name:string
     cost?:number
     limit_date:string

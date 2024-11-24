@@ -51,7 +51,7 @@ export default function Home() {
               >
                 {filtred &&
                   filtred.map((item, index) => (
-                    <Draggable key={item.id} draggableId={item.id.toString()} index={index} >
+                    <Draggable key={item.id} draggableId={(item.id ?? 0).toString()} index={index} >
                       {(provided) => (
                         <div
                           ref={provided.innerRef}
@@ -60,7 +60,7 @@ export default function Home() {
                           className={styles['tasks-container-draggable']}
                         >
                           <Tasks
-                            item={item}
+                            desc={item.description}
                             loading={setLoading}
                             id={item.id}
                             over1000={item.cost as number >= 1000}

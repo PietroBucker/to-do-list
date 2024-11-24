@@ -7,7 +7,7 @@ import Form from '../Form';
 import { deleteTask } from '../../helpers';
 
 export default function Tasks({ 
-  item, 
+  desc, 
   children, 
   loading, 
   id, 
@@ -38,7 +38,7 @@ export default function Tasks({
         </StyledButton>
       </div>
       <dialog open={isOpen} className={styles.dialog_description}>
-        <p className={styles.description}>{item.desc}</p>
+        <p className={styles.description}>{desc}</p>
       </dialog>
       <Form ref={editModalRef} useRef={editModalRef} action={'edit'} loading={loading} id={id} />
     </div>
