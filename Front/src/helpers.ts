@@ -1,5 +1,5 @@
 import React from "react"
-import { TasksResponse } from "../../Back/src/interface"
+import { TasksResponse } from "./interface"
 type reactDispatch<T> = React.Dispatch<React.SetStateAction<T>>
 
 export function getTasks(setData:reactDispatch<TasksResponse[]>, setLoading:reactDispatch<boolean>){
