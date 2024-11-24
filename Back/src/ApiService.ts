@@ -97,6 +97,9 @@ class ApiService implements IApiService {
     private setupMiddleware(): void {
         this.app.use(cors())
         this.app.use(express.json())
+        this.app.listen(3000, () => {
+            console.log("Server listening on PORT", 3000);
+        });
     }
 
     public async startServer(port: number): Promise<void> {
@@ -128,5 +131,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
     const apiService = new ApiService(dbConfig); // Cria a instância da ApiService
     
     // Chama a função de handleRequest que cuida do roteamento e da lógica do Express
+    apiService.startServer(3000);
     apiService.handleRequest(req, res);  
 };
+

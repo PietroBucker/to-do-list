@@ -2,13 +2,12 @@
   "name": "back",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "ApiService.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "nodemon",
     "build": "tsc",
     "start": "node dist/ApiService.js"
-
   },
   "keywords": [],
   "author": "",
