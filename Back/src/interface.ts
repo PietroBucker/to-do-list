@@ -1,4 +1,4 @@
-import { Connection } from 'mysql2';
+import { Connection } from "mysql2";
 
 export interface IDataBaseService {
     connection: Connection;
