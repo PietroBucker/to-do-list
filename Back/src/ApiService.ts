@@ -3,7 +3,7 @@ import { IApiService, IDataBaseService, TasksResponse } from './interface'
 import express from 'express'
 import cors from 'cors'
 import DataBaseService, { dbConfig } from './DataBaseService'
-import { get } from 'http'
+import {VercelRequest, VercelResponse} from '@vercel/node'
 
 class ApiService implements IApiService {
     private app: express.Application
@@ -116,18 +116,17 @@ class ApiService implements IApiService {
 
 
     }
+
+     // Função para manipular a requisição serverless
+     public handleRequest(req: VercelRequest, res: VercelResponse): void {
+        this.app(req, res);  // Express lida com o roteamento automaticamente
+    }
 }
-const apiService = new ApiService(dbConfig);
-apiService.startServer(5000);
 
-
-// Função Serverless que será chamada pelo Vercel
-// const taskAPI = new TaskAPI(dbConfig);
-
-// export default async (req: VercelRequest, res: VercelResponse) => {
-//   if (req.method === 'GET') {
-//     return taskAPI.getTasks(req, res);
-//   }
-
-//   res.status(405).json({ error: 'Método não permitido' });
-// };
+// Função serverless
+export default async (req: VercelRequest, res: VercelResponse) => {
+    const apiService = new ApiService(dbConfig); // Cria a instância da ApiService
+    
+    // Chama a função de handleRequest que cuida do roteamento e da lógica do Express
+    apiService.handleRequest(req, res);  
+};
