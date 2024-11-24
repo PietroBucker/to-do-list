@@ -1,12 +1,17 @@
 {
-    "builds": [
-      {
-        "src": "front/package.json",
-        "use": "@vercel/node"
+  "builds": [
+    {
+      "src": "front/package.json", 
+      "use": "@vercel/static-build", 
+      "config": {
+        "distDir": "build"  
       }
-    ],
-    "ignore": [
-      "back"
-    ]
-  }
-  
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/front/$1" 
+    }
+  ]
+}
