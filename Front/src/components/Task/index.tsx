@@ -19,6 +19,12 @@ export default function Tasks({
   const editModalRef = React.useRef<HTMLDialogElement>(null);
   const [isOpen, setIsOpen] = React.useState(false);
 
+  const confirmDelete = () => {
+    if (window.confirm('Você tem certeza que deseja deletar essa tarefa?')) {
+      deleteTask(id, loading);
+    }
+  }
+
   return (
     <div
       {...draggableProps}
@@ -33,7 +39,7 @@ export default function Tasks({
         <StyledButton onClick={() => editModalRef.current?.showModal()}>
           <img src={pencil} alt='pencil' />
         </StyledButton>
-        <StyledButton onClick={() => deleteTask(id, loading)}>
+        <StyledButton onClick={confirmDelete}>
           <img src={trash} alt="trash" />
         </StyledButton>
       </div>

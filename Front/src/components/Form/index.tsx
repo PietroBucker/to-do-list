@@ -49,8 +49,6 @@ const Form = React.forwardRef<HTMLDialogElement, FormProps>(({ useRef, action, l
                 }
             }
 
-    
-
     return (
         <>
             {message === '' ? '' : <PopUp message={message} setMessage={setMessage} />}
