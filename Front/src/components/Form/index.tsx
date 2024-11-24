@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import StyledButton from '../StyledButton';
 import styles from './Form.module.css'
-import { TasksResponse } from '../../../../Back/src/interface';
+import { TasksResponse } from '../../interface';
 import PopUp from '../PopUp';
 import { editTask, saveTask } from '../../helpers';
 interface FormProps {

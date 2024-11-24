@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TasksResponse } from "../../../Back/src/interface";
+import { TasksResponse } from "../interface";
 import { filterData, getTasks } from "../helpers";
 import Tasks from "../components/Task";
 import SearchBar from "../components/SearchBar";
