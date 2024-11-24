@@ -5,14 +5,8 @@
         "src": "Front/package.json",
         "use": "@vercel/static-build", 
         "config": {
-          "distDir": "build"  
+          "distDir": "dist"  
         }
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/Front/$1"  
       }
     ]
   }
