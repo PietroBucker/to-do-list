@@ -42,6 +42,14 @@ class ApiService implements IApiService {
 
         this.app.post('/tasks', async (req, res) => {
             const { task_name, cost, limit_date, description } = req.body as TasksResponse
+
+            const get: TasksResponse[] = await this.db.query('SELECT * FROM tasks', [])
+            const taskNameVerify = get.some((task) => task.task_name === task_name)
+            if(taskNameVerify){
+                res.status(400).json({error: 'Nome da tarefa já existe'})
+                return
+            }
+
             const costVerify = !cost ? 0.00 : cost
             try {
             const response = await this.db.query('INSERT INTO tasks (task_name, cost, limit_date, description) VALUES (?, ?, ?, ?)', [task_name, costVerify, limit_date, description])
@@ -55,6 +63,14 @@ class ApiService implements IApiService {
         this.app.put('/tasks/:id', async (req, res) => {
             const { task_name, cost, limit_date, description } = req.body as TasksResponse
             const { id } = req.params
+
+            const get: TasksResponse[] = await this.db.query('SELECT * FROM tasks', [])
+            const taskNameVerify = get.some((task) => task.task_name === task_name)
+            if(taskNameVerify){
+                res.status(400).json({error: 'Nome da tarefa já existe'})
+                return
+            }
+
             const costVerify = !cost ? 0.00 : cost.toFixed(2)
             try {
                 const response = await this.db.query('UPDATE tasks SET task_name = ?, cost = ?, limit_date = ?, description = ? WHERE id = ?', [task_name, costVerify, limit_date, description, id])
