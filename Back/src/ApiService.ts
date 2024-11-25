@@ -99,7 +99,7 @@ export default class ApiService implements IApiService {
 
     private setupMiddleware(): void {
         const corsOptions = {
-            origin: '*',
+            origin: ['*'],
             methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
             allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Custom-Header'],
         };

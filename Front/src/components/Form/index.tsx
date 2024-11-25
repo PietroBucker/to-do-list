@@ -39,6 +39,7 @@ const Form = React.forwardRef<HTMLDialogElement, FormProps>(({ useRef, action, l
                 cleanData()
                 break;
             case 'edit':
+                console.log("form")
                 editTask(data, id, setMessage)
                 loading(true)
                 useRef.current?.close()
