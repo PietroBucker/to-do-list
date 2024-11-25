@@ -62,3 +62,26 @@ input:focus{
     width: 100%;
     margin-top: 50px;
 }
+
+@media screen and (max-width: 768px) {
+    .dialog_container {
+        width: 30%;
+        height: 50%;
+        
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .dialog_container {
+        width: 50%;
+        height: 50%;
+        
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .dialog_container {
+        width: 65%;
+        height: 50%;
+    }
+}
