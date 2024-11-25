@@ -38,14 +38,14 @@ export const editTask = async (data:TasksResponse, id:number ,setMessage:reactDi
         },
         body: JSON.stringify(data)
     })
-    const json = await response.json()
-    if (json.error) {
-        setMessage(json.error)
-    }
-    else {
-        setMessage('Tarefa atualizada com sucesso')
-    }
-
+    // const json = await response.json()
+    // if (json.error) {
+    //     setMessage(json.error)
+    // }
+    // else {
+    //     setMessage('Tarefa atualizada com sucesso')
+    // }
+    console.log("helpler")
 }
 
 
