@@ -40,44 +40,45 @@ export default function Home() {
         <ThemeButton />
       </div>
       <div className={styles['home-container-tasks']}>
-        {loading ? <h1>Carregando...</h1> : ''}
-        <DragDropContext onDragEnd={handleDragEnd}>
-          <Droppable droppableId="tasks">
-            {(provided) => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                className={styles['tasks-list-droppable']}
-              >
-                {filtred &&
-                  filtred.map((item, index) => (
-                    <Draggable key={item.id} draggableId={(item.id ?? 0).toString()} index={index} >
-                      {(provided) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          className={styles['tasks-container-draggable']}
-                        >
-                          <Tasks
-                            desc={item.description}
-                            loading={setLoading}
-                            id={item.id}
-                            over1000={item.cost as number >= 1000}
+        {loading ? <h1>Carregando...</h1> : (
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <Droppable droppableId="tasks">
+              {(provided) => (
+                <div
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  className={styles['tasks-list-droppable']}
+                >
+                  {filtred &&
+                    filtred.map((item, index) => (
+                      <Draggable key={item.id} draggableId={(item.id ?? 0).toString()} index={index} >
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            className={styles['tasks-container-draggable']}
                           >
-                            <div className={styles.task_item_container}>{item.task_name}</div>
-                            <div className={styles.task_item_container}>{item.limit_date}</div>
-                            <div className={styles.task_item_container}>{item.cost}</div>
-                          </Tasks>
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+                            <Tasks
+                              desc={item.description}
+                              loading={setLoading}
+                              id={item.id}
+                              over1000={item.cost as number >= 1000}
+                            >
+                              <div className={styles.task_item_container}>{item.task_name}</div>
+                              <div className={styles.task_item_container}>{item.limit_date}</div>
+                              <div className={styles.task_item_container}>{item.cost}</div>
+                            </Tasks>
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        )}
         <StyledButton
           onClick={() => modalFormRef.current?.showModal()}
           className={styles['fixed-button']}

@@ -30,29 +30,26 @@ const Form = React.forwardRef<HTMLDialogElement, FormProps>(({ useRef, action, l
         setData({ ...data, [target.name]: target.value })
     }
 
-    const handleSubmit = () => {
+  const handleSubmit = async () => {
         switch (action) {
             case 'save':
                 saveTask(data, setMessage)
-                loading(true)
                 useRef.current?.close()
                 cleanData()
                 break;
             case 'edit':
-                console.log("form")
-                editTask(data, id, setMessage)
-                loading(true)
-                useRef.current?.close()
-                cleanData()    
+                await editTask(data, id, setMessage)
+                useRef.current?.close()           
+                cleanData()               
                 break;
                 default:
                     break;
                 }
             }
-
+        
     return (
         <>
-            {message === '' ? '' : <PopUp message={message} setMessage={setMessage} />}
+            {message === '' ? '' : <PopUp message={message} setMessage={setMessage} loading={loading} />}
             <dialog ref={ref} onClick={handleOutsideClick} className={styles.dialog_container}>
                 <div className={styles.dialog_content}>
                     <form>
@@ -108,6 +105,7 @@ const Form = React.forwardRef<HTMLDialogElement, FormProps>(({ useRef, action, l
                         <StyledButton
                             onClick={handleSubmit}
                             className={styles.buttons}
+                            
                         >APPLY</StyledButton>
                     </div>
 

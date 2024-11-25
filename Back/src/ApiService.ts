@@ -30,7 +30,9 @@ export default class ApiService implements IApiService {
 
                     const data = new Date(task.limit_date)
                     const format = new Intl.DateTimeFormat('pt-BR').format(data).toString()
-                    return {...task, limit_date: format, cost: !task.cost? 0 : task.cost}
+                    const formatNumber = !task.cost? 0 : task.cost.toFixed(2)
+                                    
+                    return {...task, limit_date: format, cost: formatNumber}
                 })
                 res.json(dataFormat)
             }
@@ -66,22 +68,23 @@ export default class ApiService implements IApiService {
         this.app.put('/tasks/:id', async (req, res) => {
             const { task_name, cost, limit_date, description } = req.body as TasksResponse
             const { id } = req.params
-            res.json({id, message: 'Hello World'})
-            // const get: TasksResponse[] = await this.db.query('SELECT * FROM tasks', [])
-            // const taskNameVerify = get.some((task) => task.task_name === task_name)
-            // if(taskNameVerify){
-            //     res.status(400).json({error: 'Nome da tarefa já existe'})
-            //     return
-            // }
+            const get: TasksResponse[] = await this.db.query('SELECT * FROM tasks', [])
+            const taskNameVerify = get.some((task) => task.task_name === task_name)
+            if(taskNameVerify){
+                res.status(400).json({error: 'Nome da tarefa já existe'})
+                return
+            }
+            const costVerify = !cost ? 0.00 : cost
+            
+            try {
+                await this.db.query('UPDATE tasks SET task_name = ?, cost = ?, limit_date = ?, description = ? WHERE id = ?', [task_name, costVerify, limit_date, description, id])
+                res.json({id, task_name, cost: costVerify, limit_date, description})
+            }
+            catch (error) {
+                res.status(500).json({error: 'Erro ao atualizar a tarefa'})
+            }
 
-            // const costVerify = !cost ? 0.00 : cost.toFixed(2)
-            // try {
-            //     const response = await this.db.query('UPDATE tasks SET task_name = ?, cost = ?, limit_date = ?, description = ? WHERE id = ?', [task_name, costVerify, limit_date, description, id])
-            //     res.json({id, task_name, cost: costVerify, limit_date, description})
-            // }
-            // catch (error) {
-            //     res.status(500).json({error: 'Erro ao atualizar a tarefa'})
-            // }
+            
         })
        
         this.app.delete('/tasks/:id', async (req, res) => {
@@ -99,7 +102,7 @@ export default class ApiService implements IApiService {
 
     private setupMiddleware(): void {
         const corsOptions = {
-            origin: ['*'],
+            origin: '*',
             methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
             allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Custom-Header'],
         };
@@ -144,5 +147,5 @@ export default class ApiService implements IApiService {
 //     apiService.handleRequest(req, res);  
 // };
 
-// const apiService = new ApiService(dbConfig)
-// apiService.startServer(5000)
+const apiService = new ApiService(dbConfig)
+apiService.startServer(5000)

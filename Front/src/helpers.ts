@@ -1,9 +1,10 @@
 import React from "react"
 import { TasksResponse } from "./interface"
+import { log } from "console"
 type reactDispatch<T> = React.Dispatch<React.SetStateAction<T>>
 
 export function getTasks(setData:reactDispatch<TasksResponse[]>, setLoading:reactDispatch<boolean>){
-    fetch('https://to-do-list-zvcz.vercel.app/tasks')
+    fetch('http://localhost:5000/tasks')
             .then(response => response.json())
             .then(json => setData(json))
             .then(() => setLoading(false))
@@ -13,7 +14,7 @@ export function getTasks(setData:reactDispatch<TasksResponse[]>, setLoading:reac
 export const saveTask = async (data:TasksResponse, setMessage:reactDispatch<string>) => {
 
 
-    const response = await fetch('https://to-do-list-zvcz.vercel.app/tasks/', {
+    const response = await fetch('http://localhost:5000/tasks/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -31,22 +32,22 @@ export const saveTask = async (data:TasksResponse, setMessage:reactDispatch<stri
 }
 
 export const editTask = async (data:TasksResponse, id:number ,setMessage:reactDispatch<string>) => {
-    console.log("helpler")
-    
-    // const response = await fetch(`https://to-do-list-zvcz.vercel.app/tasks/${id}`, {
-    //     method: 'PUT',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(data)
-    // })
-    // const json = await response.json()
-    // if (json.error) {
-    //     setMessage(json.error)
-    // }
-    // else {
-    //     setMessage('Tarefa atualizada com sucesso')
-    // }
+    const response = await fetch(`http://localhost:5000/tasks/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+
+    const json = await response.json()
+    if (json.error) {
+        setMessage(json.error)
+    }
+    else {
+        
+        setMessage('Tarefa salva com sucesso')
+    }
 }
 
 
