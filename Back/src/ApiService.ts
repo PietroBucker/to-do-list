@@ -99,7 +99,7 @@ export default class ApiService implements IApiService {
 
     private setupMiddleware(): void {
         const corsOptions = {
-            origin: ['https://to-do-list-h5a87x4zc-pietro-buckers-projects.vercel.app/', 'https://to-do-list-nine-lime-73.vercel.app/', 'https://to-do-list-git-main-pietro-buckers-projects.vercel.app/'], 
+            origin: 'to-do-list-zvcz.vercel.app',
             methods: ['GET', 'POST', 'PUT', 'DELETE'], 
             allowedHeaders: ['Content-Type', 'Authorization'],
         };
