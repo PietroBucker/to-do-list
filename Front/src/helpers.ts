@@ -12,7 +12,7 @@ export function getTasks(setData:reactDispatch<TasksResponse[]>, setLoading:reac
     })
             .then(response => response.json())
             .then(json => setData(json))
-            .then(() => setLoading(false)).then(() => console.log('carregou'))
+            .then(() => setLoading(false))
     
 }
 
