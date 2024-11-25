@@ -1,6 +1,5 @@
 import React from "react"
 import { TasksResponse } from "./interface"
-import { log } from "console"
 type reactDispatch<T> = React.Dispatch<React.SetStateAction<T>>
 
 export function getTasks(setData:reactDispatch<TasksResponse[]>, setLoading:reactDispatch<boolean>){
