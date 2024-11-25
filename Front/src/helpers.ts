@@ -30,31 +30,23 @@ export const saveTask = async (data:TasksResponse, setMessage:reactDispatch<stri
 
 }
 
-export const editTask = async (data: TasksResponse, id: number, setMessage: reactDispatch<string>) => {
-    try {
-        const response = await fetch(`https://to-do-list-zvcz.vercel.app/tasks/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-
-        if (!response.ok) {
-            throw new Error(`Erro: ${response.status} - ${response.statusText}`);
-        }
-
-        const json = await response.json();
-        if (json.error) {
-            setMessage(json.error);
-        } else {
-            setMessage('Tarefa atualizada com sucesso');
-        }
-    } catch (error) {
-        setMessage(`Erro ao atualizar a tarefa`);
+export const editTask = async (data:TasksResponse, id:number ,setMessage:reactDispatch<string>) => {
+    const response = await fetch(`https://to-do-list-zvcz.vercel.app/tasks/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    const json = await response.json()
+    if (json.error) {
+        setMessage(json.error)
     }
-};
+    else {
+        setMessage('Tarefa atualizada com sucesso')
+    }
 
+}
 
 
 
