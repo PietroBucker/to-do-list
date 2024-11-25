@@ -31,6 +31,7 @@ export const saveTask = async (data:TasksResponse, setMessage:reactDispatch<stri
 }
 
 export const editTask = async (data:TasksResponse, id:number ,setMessage:reactDispatch<string>) => {
+    console.log("helpler")
     const response = await fetch(`https://to-do-list-zvcz.vercel.app/tasks/${id}`, {
         method: 'PUT',
         headers: {
@@ -45,7 +46,6 @@ export const editTask = async (data:TasksResponse, id:number ,setMessage:reactDi
     // else {
     //     setMessage('Tarefa atualizada com sucesso')
     // }
-    console.log("helpler")
 }
 
 
