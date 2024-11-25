@@ -3,7 +3,7 @@ import { TasksResponse } from "./interface"
 type reactDispatch<T> = React.Dispatch<React.SetStateAction<T>>
 
 export function getTasks(setData:reactDispatch<TasksResponse[]>, setLoading:reactDispatch<boolean>){
-    fetch('https://to-do-list-zvcz.vercel.app//tasks', {
+    fetch('https://to-do-list-zvcz.vercel.app/tasks', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -19,7 +19,7 @@ export function getTasks(setData:reactDispatch<TasksResponse[]>, setLoading:reac
 export const saveTask = async (data:TasksResponse, setMessage:reactDispatch<string>) => {
 
 
-    const response = await fetch('https://to-do-list-zvcz.vercel.app//tasks/', {
+    const response = await fetch('https://to-do-list-zvcz.vercel.app/tasks/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ export const saveTask = async (data:TasksResponse, setMessage:reactDispatch<stri
 }
 
 export const editTask = async (data:TasksResponse, id:number ,setMessage:reactDispatch<string>) => {
-    const response = await fetch(`https://to-do-list-zvcz.vercel.app//tasks/${id}`, {
+    const response = await fetch(`https://to-do-list-zvcz.vercel.app/tasks/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -57,7 +57,7 @@ export const editTask = async (data:TasksResponse, id:number ,setMessage:reactDi
 
 
 export const deleteTask = async (id:number, loading:reactDispatch<boolean>) => {
-    const response = await fetch(`https://to-do-list-zvcz.vercel.app//tasks/${id}`, {
+    const response = await fetch(`https://to-do-list-zvcz.vercel.app/tasks/${id}`, {
       method: 'DELETE',
     })
     const json = await response.json()
