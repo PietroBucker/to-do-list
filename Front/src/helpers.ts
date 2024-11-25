@@ -3,7 +3,7 @@ import { TasksResponse } from "./interface"
 type reactDispatch<T> = React.Dispatch<React.SetStateAction<T>>
 
 export function getTasks(setData:reactDispatch<TasksResponse[]>, setLoading:reactDispatch<boolean>){
-    fetch('https://to-do-list-zvcz.vercel.app/tasks', {
+    fetch('https://to-do-list-zvcz.vercel.app/', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -12,7 +12,7 @@ export function getTasks(setData:reactDispatch<TasksResponse[]>, setLoading:reac
     })
             .then(response => response.json())
             .then(json => setData(json))
-            .then(() => setLoading(false))
+            .then(() => setLoading(false)).then(() => console.log('carregou'))
     
 }
 
