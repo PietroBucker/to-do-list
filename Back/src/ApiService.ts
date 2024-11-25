@@ -101,7 +101,7 @@ export default class ApiService implements IApiService {
         const corsOptions = {
             origin: ['https://to-do-list-nine-lime-73.vercel.app/', 'https://to-do-list-zvcz.vercel.app/tasks'], 
             methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-            allowedHeaders: ['Content-Type', 'Authorization'],
+            allowedHeaders: ['Content-Type', 'Authorization', 'application/json'],
         };
         this.app.use(cors(corsOptions))
         this.app.use(express.json())
