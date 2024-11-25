@@ -5,7 +5,7 @@ import cors from 'cors'
 import DataBaseService, { dbConfig } from './DataBaseService'
 import {VercelRequest, VercelResponse} from '@vercel/node'
 
-export class ApiService implements IApiService {
+export default class ApiService implements IApiService {
     private app: express.Application
     private db: IDataBaseService
 
@@ -138,5 +138,5 @@ export class ApiService implements IApiService {
 //     apiService.handleRequest(req, res);  
 // };
 
-const apiService = new ApiService(dbConfig)
-apiService.startServer(5000)
+// const apiService = new ApiService(dbConfig)
+// apiService.startServer(5000)

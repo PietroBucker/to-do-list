@@ -5,9 +5,7 @@
   "main": "ApiService.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon",
-    "build": "tsc",
-    "start": "node dist/ApiService.js"
+    "start": "nodemon"
   },
   "keywords": [],
   "author": "",
