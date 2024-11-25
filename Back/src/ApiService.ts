@@ -77,7 +77,7 @@ export default class ApiService implements IApiService {
             const costVerify = !cost ? 0.00 : cost.toFixed(2)
             try {
                 const response = await this.db.query('UPDATE tasks SET task_name = ?, cost = ?, limit_date = ?, description = ? WHERE id = ?', [task_name, costVerify, limit_date, description, id])
-                res.json({id:response.insertId, task_name, cost: costVerify, limit_date, description})
+                res.json({id, task_name, cost: costVerify, limit_date, description})
             }
             catch (error) {
                 res.status(500).json({error: 'Erro ao atualizar a tarefa'})

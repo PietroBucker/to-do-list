@@ -32,6 +32,7 @@ export const saveTask = async (data:TasksResponse, setMessage:reactDispatch<stri
 
 export const editTask = async (data:TasksResponse, id:number ,setMessage:reactDispatch<string>) => {
     const response = await fetch(`https://to-do-list-zvcz.vercel.app/tasks/${id}`, {
+        mode: 'no-cors',
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
