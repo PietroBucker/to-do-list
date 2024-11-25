@@ -99,15 +99,13 @@ export default class ApiService implements IApiService {
 
     private setupMiddleware(): void {
         const corsOptions = {
-            origin: ['https://to-do-list-nine-lime-73.vercel.app/', 'https://to-do-list-zvcz.vercel.app/tasks'], 
+            origin: '*', 
             methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-            allowedHeaders: ['Content-Type', 'Authorization', 'application/json'],
+            allowedHeaders: ['Content-Type', 'Authorization'],
         };
         this.app.use(cors(corsOptions))
+        this.app.options('*', cors(corsOptions))
         this.app.use(express.json())
-        this.app.listen(3000, () => {
-            console.log("Server listening on PORT", 3000);
-        });
     }
 
     public async startServer(port: number): Promise<void> {
