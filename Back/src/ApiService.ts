@@ -5,7 +5,7 @@ import cors from 'cors'
 import DataBaseService, { dbConfig } from './DataBaseService'
 import {VercelRequest, VercelResponse} from '@vercel/node'
 
-class ApiService implements IApiService {
+export class ApiService implements IApiService {
     private app: express.Application
     private db: IDataBaseService
 
@@ -38,6 +38,9 @@ class ApiService implements IApiService {
                 res.status(500).json({error: 'Erro ao buscar as tarefas'})
             }
 
+        })
+        this.app.get('/', async (req, res) => {
+            res.json({message: 'Hello World'})
         })
 
         this.app.post('/tasks', async (req, res) => {
@@ -127,13 +130,13 @@ class ApiService implements IApiService {
 }
 
 // Função serverless
-export default async (req: VercelRequest, res: VercelResponse) => {
-    const apiService = new ApiService(dbConfig); // Cria a instância da ApiService
+// export default async (req: VercelRequest, res: VercelResponse) => {
+//     const apiService = new ApiService(dbConfig); // Cria a instância da ApiService
     
-    // Chama a função de handleRequest que cuida do roteamento e da lógica do Express
-    // apiService.startServer(5000);
-    apiService.handleRequest(req, res);  
-};
+//     // Chama a função de handleRequest que cuida do roteamento e da lógica do Express
+//     // apiService.startServer(5000);
+//     apiService.handleRequest(req, res);  
+// };
 
-// const apiService = new ApiService(dbConfig)
-// apiService.startServer(5000)
+const apiService = new ApiService(dbConfig)
+apiService.startServer(5000)
