@@ -100,26 +100,19 @@ export default class ApiService implements IApiService {
     private setupMiddleware(): void {
         const corsOptions = {
             origin: '*',
-            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
-            allowedHeaders: ['Content-Type', 'Authorization'],
+            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+            allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Custom-Header'],
         };
+        
         this.app.use(cors(corsOptions))
         
         this.app.use(express.json())
 
-        this.app.options('*', (req, res) => {
-            res.header('Access-Control-Allow-Origin', '*');
-            res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-            res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-            res.sendStatus(200); // Retorna OK para a preflight request
-          });
-
-
-
-          this.app.use((req, res, next) => {
+        this.app.use((req, res, next) => {
             console.log(`Method: ${req.method}, Path: ${req.path}`);
             next();
-          });
+        });
+
     }
 
     public async startServer(port: number): Promise<void> {
