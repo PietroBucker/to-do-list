@@ -3,7 +3,7 @@ import { TasksResponse } from "./interface"
 type reactDispatch<T> = React.Dispatch<React.SetStateAction<T>>
 
 export function getTasks(setData:reactDispatch<TasksResponse[]>, setLoading:reactDispatch<boolean>){
-    fetch('http://localhost:5000/tasks')
+    fetch('https://to-do-list-zvcz.vercel.app//tasks')
             .then(response => response.json())
             .then(json => setData(json))
             .then(() => setLoading(false))
@@ -12,7 +12,7 @@ export function getTasks(setData:reactDispatch<TasksResponse[]>, setLoading:reac
 export const saveTask = async (data:TasksResponse, setMessage:reactDispatch<string>) => {
 
 
-    const response = await fetch('http://localhost:5000/tasks/', {
+    const response = await fetch('https://to-do-list-zvcz.vercel.app//tasks/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -30,7 +30,7 @@ export const saveTask = async (data:TasksResponse, setMessage:reactDispatch<stri
 }
 
 export const editTask = async (data:TasksResponse, id:number ,setMessage:reactDispatch<string>) => {
-    const response = await fetch(`http://localhost:5000/tasks/${id}`, {
+    const response = await fetch(`https://to-do-list-zvcz.vercel.app//tasks/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ export const editTask = async (data:TasksResponse, id:number ,setMessage:reactDi
 
 
 export const deleteTask = async (id:number, loading:reactDispatch<boolean>) => {
-    const response = await fetch(`http://localhost:5000/tasks/${id}`, {
+    const response = await fetch(`https://to-do-list-zvcz.vercel.app//tasks/${id}`, {
       method: 'DELETE',
     })
     const json = await response.json()
