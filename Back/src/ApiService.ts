@@ -113,6 +113,13 @@ export default class ApiService implements IApiService {
             res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
             res.sendStatus(200); // Retorna OK para a preflight request
           });
+
+
+
+          this.app.use((req, res, next) => {
+            console.log(`Method: ${req.method}, Path: ${req.path}`);
+            next();
+          });
     }
 
     public async startServer(port: number): Promise<void> {
