@@ -108,10 +108,6 @@ export default class ApiService implements IApiService {
         
         this.app.use(express.json())
 
-        this.app.use((req, res, next) => {
-            console.log(`Method: ${req.method}, Path: ${req.path}`);
-            next();
-        });
 
     }
 
